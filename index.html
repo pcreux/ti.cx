@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>ti.cx</title>
+    <style>
+      body {
+        height: 100%;
+        width: 100%;
+        // no sidebar
+      }
+      #clock {
+        // not selectable
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        color: #eee;
+        font-family: monospace;
+        font-size: 64pt;
+
+      }
+
+      span {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">
+      #<span id="hours"></span><span id="minutes"></span><span id="seconds"></span></div>
+  </body>
+  <script>
+    function renderTime() {
+      var time = new Date();
+      var hours = (time.getHours() % 12).toString().padStart(2, "0");
+      var minutes = time.getMinutes().toString().padStart(2, "0");
+      var seconds = time.getSeconds().toString().padStart(2, "0");
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+      document.getElementById("seconds").innerHTML = seconds;
+      document.getElementsByTagName("body")[0].setAttribute(
+        "style", "background: #".concat(hours, minutes, seconds)
+      )
+      setTimeout(renderTime, 1000);
+    }
+    renderTime();
+  </script>
+</html>
